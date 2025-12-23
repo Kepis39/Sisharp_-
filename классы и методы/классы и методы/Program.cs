@@ -1,47 +1,33 @@
 ﻿// Базовый уровень 28 вариант
-class ElectricCircuit
+Console.WriteLine("Введите значение напряжения: ");
+double u = double.Parse(Console.ReadLine());
+Console.WriteLine("Введите значение сопротивления: ");
+double r = double.Parse(Console.ReadLine());
+
+ElectroCalc calc = new ElectroCalc(u, r);
+calc.Print();
+
+class ElectroCalc
 {
-    private double voltage; 
-    private double resistance; 
-
-   
-    public static double defaultResistance = 1;
-
-   
-    public static double DefaultResistance
+    private double u;
+    private double r;
+    
+    public ElectroCalc(double u, double r)
     {
-        get { return defaultResistance; }
-        set { if (value > 0) defaultResistance = value; }
+        this.u = u;
+        this.r = r;
     }
-
-    public ElectricCircuit(double voltage, double resistance)
+    
+    public double getu() { return u; }
+    public double getr() { return r; }
+    
+    public double getI()
     {
-        this.voltage = voltage;
-        this.resistance = resistance;
+        return u / r;
     }
-
-    static ElectricCircuit()
+    
+    public void Print()
     {
-        defaultResistance = 1;
-    }
-
-    public void CalculateCurrent()
-    {
-        double current = voltage / resistance;
-        Console.WriteLine($"Ток: {current:F2} А");
-    }
-
-    public static void CheckCurrent(double voltage, double resistance)
-    {
-        double current = voltage / resistance;
-        Console.WriteLine($"Ток: {current:F2} А");
-    }
-}
-
-public static class ElectricalCalculations
-{
-    public static double GetCurrent(double voltage, double resistance)
-    {
-        return voltage / resistance;
+        Console.WriteLine("Ток по основной формуле (getI): " + getI());
     }
 }
